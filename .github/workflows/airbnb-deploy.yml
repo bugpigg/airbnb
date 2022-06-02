@@ -1,15 +1,15 @@
-name: airbnb-deploy
+name: airbnb 개발용 CI
 
 on:
-#   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches:
-    - BE
-  pull_request:
-    branches:
-    - BE
-
-
+  # Triggers the workflow on push or pull request events but only for the main branch
+#   push:
+#     branches:
+#     - BE
+#   pull_request:
+#     branches:
+#     - BE
+  workflow_dispatch:
+  
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -35,9 +35,4 @@ jobs:
       
       - name: Gradle Build Action
         uses: gradle/gradle-build-action@v2.1.7
-          
-      
-      
-      
-      
-      
+    
