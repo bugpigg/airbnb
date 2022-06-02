@@ -43,6 +43,7 @@ jobs:
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip .
         shell: bash
+        working-directory: ${{env.WORKING_DIR}}
       
       # 저장소에 미리 저장해놓은 엑세스 키 ID, 비밀 엑세스 키, 지역 정보
       - name: Configure AWS credentials
@@ -54,6 +55,7 @@ jobs:
 
       - name: Upload to S3
         run: aws s3 cp --region $AWS_REGION ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+        working-directory: ${{env.WORKING_DIR}}
 
       # CodeDeply 관련 설정
       - name: Code Deploy
