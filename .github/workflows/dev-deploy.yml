@@ -11,10 +11,11 @@ jobs:
       run:
         shell: bash
     env:
-      working-directory: ./be
+      WORKING_DIR: ./be
       S3_BUCKET_NAME: airbnb-deploy
       PROJECT_NAME: airbnb
       AWS_REGION: ap-northeast-2
+      CODE_DEPLOY_APPLICATION_NAME: codesquad-project-deploy
 
 
     steps:
@@ -31,12 +32,12 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
         shell: bash
-        working-directory: ${{env.working-directory}}
+        working-directory: ${{env.WORKING_DIR}}
       
       - name: Build with Gradle
         run: ./gradlew build
         shell: bash
-        working-directory: ${{env.working-directory}}
+        working-directory: ${{env.WORKING_DIR}}
       
       # $GITHUB_SHA는 현재 workflow를 실행시키는 커밋의 해쉬값
       - name: Make zip file
@@ -56,4 +57,4 @@ jobs:
 
       # CodeDeply 관련 설정
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name logging-system-deploy --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name develop --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name $CODE_DEPLOY_APPLICATION_NAME --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name develop --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
