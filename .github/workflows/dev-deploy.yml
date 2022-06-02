@@ -13,7 +13,7 @@ jobs:
     env:
       working-directory: ./be
       S3_BUCKET_NAME: airbnb-deploy
-      PROJECT_NAME: logging
+      PROJECT_NAME: airbnb
 
 
     steps:
