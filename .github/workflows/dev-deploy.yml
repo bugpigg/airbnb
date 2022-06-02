@@ -18,8 +18,8 @@ jobs:
     defaults:
       run:
         shell: bash
-    env:
-      working-directory: ./be
+#     env:
+#       working-directory: ./be
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
