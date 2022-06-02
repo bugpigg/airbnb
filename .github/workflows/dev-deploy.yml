@@ -18,8 +18,6 @@ jobs:
     defaults:
       run:
         shell: bash
-#     env:
-#       working-directory: ./be
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -37,5 +35,6 @@ jobs:
         run: chmod +x ./be/gradlew
         shell: bash
       
-      - name: Gradle Build Action
-        uses: gradle/gradle-build-action@v2.1.7
+      - name: Build with Gradle
+        run: ./be/gradlew build
+        shell: bash
