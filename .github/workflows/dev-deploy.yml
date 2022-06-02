@@ -58,3 +58,4 @@ jobs:
       # CodeDeply 관련 설정
       - name: Code Deploy
         run: aws deploy create-deployment --application-name $CODE_DEPLOY_APPLICATION_NAME --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name develop --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+        working-directory: ${{env.WORKING_DIR}}
