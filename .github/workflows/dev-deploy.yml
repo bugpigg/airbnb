@@ -15,7 +15,7 @@ jobs:
       S3_BUCKET_NAME: airbnb-deploy
       PROJECT_NAME: airbnb
       AWS_REGION: ap-northeast-2
-      CODE_DEPLOY_APPLICATION_NAME: codesquad-project-deploy
+      CODE_DEPLOY_APPLICATION_NAME: codesquad-deploy
 
 
     steps:
