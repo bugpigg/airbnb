@@ -44,7 +44,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
+          username: bugpigg
           password: ${{ secrets.CR_PAT }}
           
       - name: Docker Image Build and push
@@ -53,7 +53,7 @@ jobs:
           context: ${{env.WORKING_DIR}}
           file: ${{env.WORKING_DIR}}/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/airbnb-be:latest
+          tags: ghcr.io/bugpigg/airbnb-be:latest
       
       # $GITHUB_SHA는 현재 workflow를 실행시키는 커밋의 해쉬값
       - name: Make zip file
