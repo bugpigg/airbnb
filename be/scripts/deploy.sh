@@ -12,4 +12,4 @@ sudo docker image rm $IMAGE_NAME
 sudo docker pull $IMAGE_NAME
 
 # start container
-sudo docker run --env-file ./env -p 8080:8080 -d -it --name $CONTAINER_NAME $IMAGE_NAME
+sudo docker run --env-file /home/ec2-user/airbnb/env -p 8080:8080 -d -it --name $CONTAINER_NAME $IMAGE_NAME
