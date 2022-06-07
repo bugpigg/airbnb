@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": "./src", 
+    "baseUrl": "./src",
     "allowJs": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
@@ -16,7 +16,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "noImplicitThis": true
   },
-  "include": ["src"]
+  "include": ["src", "src/custom.d.ts"]
 }
