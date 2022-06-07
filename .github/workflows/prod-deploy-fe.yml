@@ -12,7 +12,7 @@ jobs:
         shell: bash
     strategy:
       matrix:
-        node-version: [15.x, 16.x]
+        node-version: [16.x]
     env:
       WORKING_DIR: ./fe
       DEPLOY_TYPE: fe
