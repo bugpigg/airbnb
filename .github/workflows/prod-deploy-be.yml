@@ -1,4 +1,4 @@
-name: airbnb 개발용 CI
+name: 백엔드 프로덕션 CI/CD
 
 on:
   workflow_dispatch:
@@ -12,6 +12,7 @@ jobs:
         shell: bash
     env:
       WORKING_DIR: ./be
+      DEPLOY_TYPE: be
       S3_BUCKET_NAME: airbnb-deploy
       PROJECT_NAME: airbnb
       AWS_REGION: ap-northeast-2
@@ -58,7 +59,7 @@ jobs:
           context: ${{env.WORKING_DIR}}
           file: ${{env.WORKING_DIR}}/Dockerfile
           push: true
-          tags: ghcr.io/bugpigg/airbnb-be:latest
+          tags: ghcr.io/bugpigg/airbnb-${{ env.DEPLOY_TYPE }}:latest
       
       # $GITHUB_SHA는 현재 workflow를 실행시키는 커밋의 해쉬값
       - name: Make zip file
@@ -75,10 +76,10 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Upload to S3
-        run: aws s3 cp --region $AWS_REGION ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws s3 cp --region $AWS_REGION ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$DEPLOY_TYPE/$GITHUB_SHA.zip
         working-directory: ${{env.WORKING_DIR}}
 
       # CodeDeply 관련 설정
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name $CODE_DEPLOY_APPLICATION_NAME --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name develop --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name $CODE_DEPLOY_APPLICATION_NAME --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name develop --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$DEPLOY_TYPE/$GITHUB_SHA.zip
         working-directory: ${{env.WORKING_DIR}}
