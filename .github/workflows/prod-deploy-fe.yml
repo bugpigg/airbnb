@@ -35,7 +35,7 @@ jobs:
         working-directory: ${{ env.WORKING_DIR }}
         
       - name: Run "npm run build --if-present"
-        run: npm run build --if-present
+        run: CI=false npm run build
         working-directory: ${{ env.WORKING_DIR }}
         
       - name: Run "npm test"
